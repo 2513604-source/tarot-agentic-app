@@ -381,7 +381,7 @@ async function generateInterpretation(drawnCards) {
 
     try {
         // Gửi data xuống Backend (Server) ở cổng 3000
-        const response = await fetch('http://localhost:3000/api/tarot', {
+        const response = await fetch('https://tarot-agentic-app.onrender.com/api/tarot', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
