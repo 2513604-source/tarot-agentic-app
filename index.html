@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot AI - Tư Vấn Chiêm Tinh</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔮 <span class="gradient-text">Tarot</span></h1>
+            <p class="tagline">Khám phá bí ẩn qua 78 lá bài Tarot</p>
+        </header>
+
+        <div class="content-wrapper">
+            <section class="input-panel">
+                <h2>Câu Hỏi Của Bạn</h2>
+
+                <form id="tarotForm">
+                    <div class="form-group">
+                        <label for="questionType">Chọn Lĩnh Vực:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="questionType" value="love" checked>
+                                💕 Tình Yêu
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="questionType" value="health">
+                                💪 Sức Khỏe
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="questionType" value="career">
+                                💼 Sự Nghiệp
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="questionType" value="general">
+                                🔮 Tổng Quan
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthDate">Ngày Sinh Của Bạn:</label>
+                        <input type="date" id="birthDate" name="birthDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zodiac">Cung Hoàng Đạo:</label>
+                        <input type="text" id="zodiac" name="zodiac" readonly placeholder="Sẽ được tính toán">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lifePathNumber">Số Đường Đời (Life Path):</label>
+                        <input type="text" id="lifePathNumber" name="lifePathNumber" readonly placeholder="Sẽ được tính toán">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="question">Câu Hỏi Chi Tiết (tuỳ chọn):</label>
+                        <textarea id="question" name="question" rows="4" placeholder="Bạn muốn hỏi điều gì? (tùy chọn)"></textarea>
+                    </div>
+
+                    <button type="button" id="drawButton" class="btn-primary" disabled style="opacity: 0.5;">
+                        🎴 Trải Bài & Rút Bài
+                    </button>
+                </form>
+
+                <div class="info-box">
+                    <p><strong>💡 Mẹo:</strong> Hãy tĩnh tâm, nghĩ về câu hỏi của bạn, sau đó tự tay chọn 3 lá bài từ bộ bài trải ra.</p>
+                </div>
+            </section>
+
+            <section class="result-panel">
+                <h2>Kết Quả Chiêm Tinh</h2>
+
+                <div id="deckSection" class="deck-draw-section">
+                    <h3>🎴 Hãy Chọn 3 Lá Bài</h3>
+                    
+                    <div id="arcSpreadContainer" class="arc-spread-container"></div>
+
+                    <div class="draw-area">
+                        <div class="card-position-wrapper">
+                            <p class="position-label">Quá Khứ</p>
+                            <div class="draw-card face-down empty-slot" id="drawCard1">
+                                <div class="card-back" style="opacity: 0.3;">🔶</div>
+                            </div>
+                        </div>
+
+                        <div class="card-position-wrapper">
+                            <p class="position-label">Hiện Tại</p>
+                            <div class="draw-card face-down empty-slot" id="drawCard2">
+                                <div class="card-back" style="opacity: 0.3;">🔶</div>
+                            </div>
+                        </div>
+
+                        <div class="card-position-wrapper">
+                            <p class="position-label">Tương Lai</p>
+                            <div class="draw-card face-down empty-slot" id="drawCard3">
+                                <div class="card-back" style="opacity: 0.3;">🔶</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" id="finalDrawButton" class="btn-primary" style="margin-top: 20px; display: none;">
+                        ✨ Xác Nhận & Lật Bài
+                    </button>
+                </div>
+
+                <div id="loadingState" class="loading-state hidden">
+                    <div class="spinner"></div>
+                    <p>Đang tư vấn với vũ trụ...</p>
+                </div>
+
+                <div id="resultContent" class="result-content hidden">
+                    <div class="cards-section">
+                        <h3>🎴 Các Lá Bài Được Chọn</h3>
+                        <div class="tarot-cards">
+                            <div class="card" id="card1">
+                                <div class="card-placeholder">?</div>
+                                <p class="card-name"></p>
+                                <p class="card-vietnamese"></p>
+                                <p class="card-position"></p>
+                            </div>
+                            <div class="card" id="card2">
+                                <div class="card-placeholder">?</div>
+                                <p class="card-name"></p>
+                                <p class="card-vietnamese"></p>
+                                <p class="card-position"></p>
+                            </div>
+                            <div class="card" id="card3">
+                                <div class="card-placeholder">?</div>
+                                <p class="card-name"></p>
+                                <p class="card-vietnamese"></p>
+                                <p class="card-position"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="interpretation-section">
+                        <div id="lifePathSummary" class="life-path-summary hidden" style="background: rgba(106, 27, 154, 0.3); padding: 10px; border-radius: 8px; border-left: 4px solid #ffd700; margin-bottom: 20px;"></div>
+
+                        <h3>📖 Luận Giải Chi Tiết</h3>
+                        <div id="interpretationText" class="interpretation-text"></div>
+                    </div>
+
+                    <div class="advice-section">
+                        <h3>💬 Lời Khuyên</h3>
+                        <div id="adviceText" class="advice-text"></div>
+                    </div>
+
+                    <button type="button" id="redrawButton" class="btn-secondary">
+                        🔄 Rút Lại
+                    </button>
+                </div>
+
+                <div id="initialState" class="initial-state">
+                    <div class="empty-state">
+                        <p>🌙 Hãy điền thông tin và chọn hoặc rút bài để khám phá bí ẩn...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="logic.js"></script>
+</body>
+</html>

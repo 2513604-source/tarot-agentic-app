@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   1. CÀI ĐẶT NỀN VŨ TRỤ (TÍM - XANH DƯƠNG)
+   ========================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+    overflow-x: hidden;
+    
+    /* Nền vũ trụ kết hợp Tím sâu và Xanh dương đậm */
+    background: radial-gradient(circle at 30% 30%, #1b003a 0%, #0d1b2a 50%, #000000 100%);
+    background-attachment: fixed; /* Khóa nền không bị hụt đáy */
+    background-size: cover;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   2. BẦU TRỜI SAO 3D NGẪU NHIÊN 
+   ========================================== */
+/* Cố định khung chứa sao */
+body::before, body::after {
+    content: "";
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100vw; height: 100vh; 
+    pointer-events: none; 
+    z-index: -1;
+}
+
+/* Lớp sao 1: Dày đặc, bay chậm (Thêm chút sao xanh/tím nhạt) */
+body::before {
+    background-image:
+        radial-gradient(1px 1px at 17% 23%, #fff, transparent),
+        radial-gradient(1px 1px at 39% 71%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1.2px 1.2px at 61% 19%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 83% 57%, #fff, transparent),
+        radial-gradient(1px 1px at 97% 89%, rgba(100, 200, 255, 0.6), transparent), /* Sao xanh dương */
+        radial-gradient(1.2px 1.2px at 11% 91%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 31% 37%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 53% 83%, rgba(200, 150, 255, 0.8), transparent), /* Sao tím nhạt */
+        radial-gradient(1px 1px at 79% 13%, #fff, transparent),
+        radial-gradient(1px 1px at 29% 59%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1.2px 1.2px at 47% 31%, #fff, transparent);
+    background-size: 213px 213px; 
+    animation: starDrift 60s linear infinite; 
+}
+
+/* Lớp sao 2: Lấp lánh vàng & xanh sáng, bay nhanh */
+body::after {
+    background-image:
+        radial-gradient(2px 2px at 13% 79%, #fff, transparent),
+        radial-gradient(2.5px 2.5px at 37% 17%, rgba(255,215,0,0.8), transparent), /* Sao vàng */
+        radial-gradient(2px 2px at 67% 93%, rgba(100,255,255,0.9), transparent), /* Sao xanh lấp lánh */
+        radial-gradient(2px 2px at 89% 41%, #fff, transparent),
+        radial-gradient(2.5px 2.5px at 51% 61%, rgba(255,215,0,0.9), transparent), /* Sao vàng */
+        radial-gradient(2px 2px at 91% 11%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2.2px 2.2px at 23% 3%, #fff, transparent);
+    background-size: 287px 287px; 
+    animation: starDrift 30s linear infinite; 
+}
+
+@keyframes starDrift {
+    from { background-position: 0 0; }
+    to { background-position: -600px 600px; }
+}
+
+
+/* Header */
+.header { text-align: center; margin-bottom: 30px; }
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 5px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #ffb700, #ffeb3b, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+.tagline { color: #b19cd9; font-style: italic; }
+
+/* Layout 2 cột */
+.content-wrapper { display: flex; gap: 30px; flex-wrap: wrap; }
+.input-panel { flex: 1; min-width: 320px; background: rgba(30, 15, 50, 0.6); padding: 25px; border-radius: 15px; border: 1px solid #6b4fab; height: fit-content;}
+.result-panel { flex: 2; min-width: 400px; background: rgba(30, 15, 50, 0.6); padding: 25px; border-radius: 15px; border: 1px solid #6b4fab; min-height: 550px;}
+
+/* Form Styles */
+h2 { color: #ffb700; margin-bottom: 20px; text-align: center; border-bottom: 1px solid rgba(255,215,0,0.2); padding-bottom: 10px;}
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; color: #e0b0ff; font-weight: bold; font-size: 0.9rem;}
+input[type="text"], input[type="date"], textarea {
+    width: 100%; padding: 12px; background: rgba(10, 5, 20, 0.5);
+    border: 1px solid #9370db; border-radius: 6px; color: #fff; font-family: inherit; transition: 0.3s;
+}
+input:focus, textarea:focus { outline: none; border-color: #ffb700; box-shadow: 0 0 10px rgba(255,215,0,0.3); }
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+
+.radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+.radio-label { flex: 1; min-width: 100px; background: rgba(10, 5, 20, 0.5); border: 1px solid #9370db; padding: 10px; border-radius: 6px; cursor: pointer; text-align: center; transition: 0.3s;}
+.radio-label:hover { background: rgba(147, 112, 219, 0.3); }
+.radio-label input { margin-right: 5px; accent-color: #ffb700; }
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+    display: block; width: 100%; padding: 15px; border-radius: 8px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 15px; text-transform: uppercase;
+}
+.btn-primary { background: linear-gradient(135deg, #ffb700, #ffd700); color: #1a0033; }
+.btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,215,0,0.4); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(1); }
+.btn-secondary { background: transparent; border: 2px solid #9370db; color: #fff; }
+.btn-secondary:hover { background: rgba(147, 112, 219, 0.3); }
+
+.info-box { background: rgba(147, 112, 219, 0.1); padding: 15px; border-radius: 8px; margin-top: 20px; font-size: 0.9rem; color: #ddd; border-left: 4px solid #6b4fab;}
+
+/* Màn hình trống ban đầu */
+.initial-state { display: flex; justify-content: center; align-items: center; height: 100%; min-height: 400px; }
+.empty-state { text-align: center; color: #b19cd9; font-style: italic; font-size: 1.1rem; }
+
+/* ==========================================
+   KHU VỰC TRẢI BÀI VÀ ARC SPREAD
+   ========================================== */
+.deck-draw-section { display: none; text-align: center; } /* Ẩn đi chờ kích hoạt */
+.deck-draw-section h3 { color: #ffb700; margin-bottom: 30px; }
+
+/* Đường cong lá bài */
+.arc-spread-container { width: 100%; height: 230px; position: relative; margin-bottom: 50px; overflow: visible; }
+.arc-card {
+    width: 65px; height: 105px; position: absolute; bottom: 0; border-radius: 6px;
+    border: 1px solid #9370db; background: linear-gradient(135deg, #3a2560, #1a0033);
+    cursor: pointer; box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.5s;
+    transform-origin: bottom center;
+}
+.arc-card img { width: 100%; height: 100%; border-radius: 5px; object-fit: cover; }
+.card-back-mini { color: #ffb700; font-size: 1.5rem; display: flex; justify-content: center; align-items: center; height: 100%; }
+.arc-card.picked { opacity: 0; pointer-events: none; transform: translateY(-100px) scale(0.5) !important; }
+
+/* 3 ô chứa bài đã rút */
+.draw-area { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
+.card-position-wrapper { text-align: center; }
+.position-label { color: #ffb700; margin-bottom: 10px; font-weight: bold; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;}
+.draw-card {
+    width: 95px; height: 150px; border-radius: 8px; border: 2px dashed #9370db;
+    background: rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; transition: 0.3s;
+}
+.draw-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; box-shadow: 0 5px 15px rgba(0,0,0,0.4);}
+.empty-slot { border: 2px dashed #9370db !important; background: rgba(0,0,0,0.2) !important; }
+
+/* ==========================================
+   KHU VỰC KẾT QUẢ & LUẬN GIẢI
+   ========================================== */
+.cards-section { text-align: center; margin-bottom: 40px; }
+.cards-section h3 { margin-bottom: 20px; color: #ffb700;}
+.tarot-cards { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.card { background: rgba(20, 10, 30, 0.8); padding: 15px; border-radius: 10px; border: 1px solid #6b4fab; width: 170px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);}
+.card-img-result { width: 100%; height: 220px; object-fit: cover; border-radius: 6px; margin-bottom: 15px; transition: 0.5s; }
+.card-name { font-weight: bold; color: #ffb700; font-size: 1.05rem;}
+.card-vietnamese { font-size: 0.9rem; color: #ddd; margin-bottom: 5px;}
+.card-position { font-size: 0.85rem; color: #b19cd9; text-transform: uppercase; font-weight: bold; margin-top: 10px;}
+
+.interpretation-section, .advice-section {
+    background: rgba(20, 10, 30, 0.7); padding: 30px; border-radius: 15px;
+    margin-bottom: 25px; border-left: 5px solid #ffb700;
+}
+.interpretation-section h3, .advice-section h3 { color: #ffb700; margin-bottom: 15px; font-size: 1.3rem;}
+.interpretation-text, .advice-text { color: #eee; line-height: 1.7; font-size: 1.05rem;}
+.interpretation-text p, .advice-text p { margin-bottom: 15px; text-align: justify; }
+
+/* Loading State */
+.loading-state { text-align: center; padding: 60px 0; }
+.spinner { width: 60px; height: 60px; border: 5px solid rgba(255,215,0,0.2); border-top-color: #ffb700; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hidden { display: none !important; }
+
+/* Animations */
+.flip-animation { animation: flip 0.4s ease-in-out; }
+@keyframes flip {
+    0% { transform: scale(1) rotateY(0deg); }
+    50% { transform: scale(1.1) rotateY(90deg); }
+    100% { transform: scale(1) rotateY(0deg); }
+}
