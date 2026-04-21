@@ -192,3 +192,35 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
     50% { transform: scale(1.1) rotateY(90deg); }
     100% { transform: scale(1) rotateY(0deg); }
 }
+/* ==========================================
+   TÀ THUẬT 1: ÉP THU NHỎ 80% CHO ĐIỆN THOẠI & TABLET
+   (Áp dụng cho màn hình nhỏ hơn 1024px)
+   ========================================== */
+@media screen and (max-width: 1023px) {
+    body {
+        zoom: 0.85; 
+        
+        /* Dành riêng cho trình duyệt Firefox */
+        -moz-transform: scale(0.85);
+        -moz-transform-origin: top center;
+    }
+}
+
+/* ==========================================
+   TÀ THUẬT 2: ÉP THU NHỎ 70% CHO LAPTOP/PC 
+   (Áp dụng cho màn hình từ 1024px trở lên)
+   ========================================== */
+@media screen and (min-width: 1024px) {
+    body {
+        zoom: 0.7; 
+        
+        /* Dành riêng cho trình duyệt Firefox */
+        -moz-transform: scale(0.7);
+        -moz-transform-origin: top center;
+    }
+    
+    /* Ép khung web nằm ngay giữa màn hình cho đẹp */
+    .container {
+        margin: 0 auto;
+    }
+}
