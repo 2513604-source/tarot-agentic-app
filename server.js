@@ -229,7 +229,7 @@ app.post('/api/tarot', async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log(`🚀 Server up: http://localhost:3000`));
+app.listen(3000, () => console.log(`🚀 Server up:  https://tarot-agentic-app.onrender.com`));
 
 
 
