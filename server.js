@@ -200,6 +200,8 @@ ${profile.guidelines.map(g => `- ${g}`).join('\n')}
 3. **Dám đoán tình huống CỤ THỂ:** Dựa vào Cung Hoàng Đạo (${zodiac}) và Số Đường Đời (${lifePathNumber}) kết hợp với bài, BẮT BUỘC phải đưa ra MỘT kịch bản giả định cực kỳ chi tiết về thứ họ đang trải qua. (VD: "Bạn đang làm một công việc ổn định nhưng chán ngấy", hoặc "Bạn đang đơn phương một người không rõ ràng"). Thà đoán sai một tình huống cụ thể, CÒN HƠN nói chung chung kiểu "bạn đang có vấn đề".
 4. **Không nói đạo lý:** Đâm thẳng vào sự thật mất lòng. Phân tích sự việc như một người quan sát sắc lạnh.
 5. Không lặp từ ,câu nhiều lần , hãy sử dụng linh hoạt vốn từ ngữ TIẾNG VIỆT phong phú.
+6. Chỉ sử dụng Tiếng Việt , không sử dụng hán tự hoặc bất kì ngôn ngữ nào khác.
+7. Không được nhắc đến cung hoàng đạo và số đường đời trong phần luận giải . VD: Không nói "Bạn là một người thuộc cung Bảo Bình, số đường đời 5 luôn khao khát tự do và độc lập" ,hãy nói "Bạn là một người luôn khao khát tự do và độc lập".
 
 **Dữ liệu người dùng:**
 - Cung Hoàng Đạo: ${zodiac}
