@@ -207,6 +207,7 @@ ${cardsInfo}
 1. TUYỆT ĐỐI KHÔNG sử dụng dấu ngoặc kép (") bên trong phần nội dung. Dùng dấu ngoặc đơn (').
 2. KHÔNG sử dụng ký tự xuống dòng (Enter) tự do. Dùng thẻ HTML <br> hoặc <p>.
 3. Trả về JSON thuần.
+4. TUYỆT ĐỐI CHỈ SỬ DỤNG TIẾNG VIỆT. KHÔNG ĐƯỢC phép chèn các từ tiếng Trung, Hán tự (như 意味) hay tiếng Anh vào bài luận giải.
 
 Định dạng JSON yêu cầu:
 {

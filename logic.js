@@ -4,17 +4,26 @@
 const TarotLogic = {
     calculateLifePath: function (birthDate) {
         if (!birthDate) return 0;
-        const parts = birthDate.split('-');
-        if (parts.length !== 3) return 0;
-        const year = parseInt(parts[0]);
-        const month = parseInt(parts[1]);
-        const day = parseInt(parts[2]);
-        let sum = day + month + year;
+        
+        // CHUẨN THẦN SỐ HỌC: Cộng rã từng chữ số riêng lẻ trong ngày tháng năm sinh
+        // Ví dụ: 1983-06-15 -> 1+9+8+3+0+6+1+5 = 33
+        let sum = 0;
+        for (let char of birthDate) {
+            if (char !== '-') {
+                sum += parseInt(char);
+            }
+        }
+        
+        // Rút gọn tổng cho đến khi về 1 chữ số, bỏ qua nếu là số Master (11, 22, 33)
         while (sum > 9) {
+            if (sum === 11 || sum === 22 || sum === 33) {
+                break;
+            }
+            
             let tempSum = 0;
-            while (sum > 0) {
-                tempSum += sum % 10;
-                sum = Math.floor(sum / 10);
+            let sumStr = sum.toString();
+            for (let char of sumStr) {
+                tempSum += parseInt(char);
             }
             sum = tempSum;
         }
