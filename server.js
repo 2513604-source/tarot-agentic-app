@@ -201,7 +201,7 @@ ${profile.guidelines.map(g => `- ${g}`).join('\n')}
 4. **Không nói đạo lý:** Đâm thẳng vào sự thật mất lòng. Phân tích sự việc như một người quan sát sắc lạnh.
 5. Không lặp từ ,câu nhiều lần , hãy sử dụng linh hoạt vốn từ ngữ TIẾNG VIỆT phong phú.
 6. Chỉ sử dụng Tiếng Việt , không sử dụng hán tự hoặc bất kì ngôn ngữ nào khác.
-7. Không được nhắc đến cung hoàng đạo và số đường đời trong phần luận giải . VD: Không nói "Bạn là một người thuộc cung Bảo Bình, số đường đời 5 luôn khao khát tự do và độc lập" ,hãy nói "Bạn là một người luôn khao khát tự do và độc lập".
+7. Không được nhắc đến cung hoàng đạo và số đường đời trong phần luận giải (VD: Không nói "Bạn là một người thuộc cung Bảo Bình, số đường đời 5 luôn khao khát tự do và độc lập" ,hãy nói "Bạn là một người luôn khao khát tự do và độc lập").
 
 **Dữ liệu người dùng:**
 - Cung Hoàng Đạo: ${zodiac}
