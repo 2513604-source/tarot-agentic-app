@@ -250,8 +250,8 @@ app.post('/api/tarot', async (req, res) => {
                     messages: chatHistory,
                     tools: tarotAgentTools,
                     tool_choice: "auto",
-                    temperature: 0.85, // Tăng độ "phiêu" cho AI
-                    max_tokens: 2000    // Cho phép nó viết dài thoải mái
+                    temperature: 0.7, // Tăng độ "phiêu" cho AI
+                    max_tokens: 1000    // Cho phép nó viết dài thoải mái
                 })
             });
 
