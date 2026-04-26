@@ -25,14 +25,62 @@ const tarotAgentTools = [{
 }];
 
 function tra_cuu_nang_luong_chiem_tinh(args) {
-    console.log(`🛠️ [TOOL] Đang quét bản đồ sao cho: ${args.zodiac_sign}`);
-    const energies = [
-        "Sao Thủy đang nghịch hành, cẩn trọng lời nói và quyết định.",
-        "Mặt trăng đi qua nhà số 8, trực giác vô cùng nhạy bén.",
-        "Sao Hỏa bùng nổ, khuyên khách hàng không nên hành động bốc đồng.",
-        "Vũ trụ cân bằng, thời điểm tốt để thuận theo tự nhiên."
+    const zodiac = args.zodiac_sign || "";
+    console.log(`🛠️ [TOOL] Đang phân tích năng lượng chiêm tinh cho: ${zodiac}`);
+    
+    // Hệ thống dữ liệu Chiêm Tinh cơ bản
+    const zodiacInfo = {
+        "Bạch Dương": { planet: "Sao Hỏa", element: "Lửa", energy: "mạnh mẽ, bốc đồng nhưng đầy nhiệt huyết" },
+        "Kim Ngưu": { planet: "Sao Kim", element: "Đất", energy: "thực tế, kiên định và hướng về vật chất/tình cảm" },
+        "Song Tử": { planet: "Sao Thủy", element: "Khí", energy: "nhạy bén, linh hoạt nhưng dễ bị phân tâm" },
+        "Cự Giải": { planet: "Mặt Trăng", element: "Nước", energy: "nhiều cảm xúc, nhạy cảm và cần sự an toàn" },
+        "Sư Tử": { planet: "Mặt Trời", element: "Lửa", energy: "tự tin, tỏa sáng nhưng dễ tự ái" },
+        "Xử Nữ": { planet: "Sao Thủy", element: "Đất", energy: "chi tiết, cẩn trọng và đôi khi quá khắt khe" },
+        "Thiên Bình": { planet: "Sao Kim", element: "Khí", energy: "cân bằng, hài hòa nhưng hay do dự" },
+        "Bọ Cạp": { planet: "Sao Diêm Vương", element: "Nước", energy: "sâu sắc, bí ẩn và có tính sở hữu cao" },
+        "Nhân Mã": { planet: "Sao Mộc", element: "Lửa", energy: "tự do, lạc quan nhưng thiếu kiên nhẫn" },
+        "Ma Kết": { planet: "Sao Thổ", element: "Đất", energy: "kỷ luật, tham vọng và đầy áp lực trách nhiệm" },
+        "Bảo Bình": { planet: "Sao Thiên Vương", element: "Khí", energy: "độc lập, phá cách và khó lường" },
+        "Song Ngư": { planet: "Sao Hải Vương", element: "Nước", energy: "mộng mơ, trực giác cao nhưng dễ tổn thương" }
+    };
+
+    // Lọc tìm Cung Hoàng Đạo chính xác từ input (loại bỏ emoji nếu có)
+    let matchedSign = "Bạch Dương"; // Fallback mặc định
+    for (const sign in zodiacInfo) {
+        if (zodiac.includes(sign)) {
+            matchedSign = sign;
+            break;
+        }
+    }
+
+    const info = zodiacInfo[matchedSign];
+    
+    // Dùng ngày hiện tại để tạo ra một "chu kỳ" năng lượng thay đổi theo ngày
+    // Điều này giúp khách hàng xem nhiều lần trong ngày vẫn nhận được cùng 1 năng lượng (nhất quán hơn random)
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    
+    // Các trạng thái di chuyển của hành tinh
+    const transitStates = [
+        "đang tạo góc vuông căng thẳng, dễ sinh xung đột nội tâm và ngoại cảnh",
+        "đang di chuyển thuận hành, mang lại sự thông suốt và may mắn",
+        "đang nghịch hành, báo hiệu cần chậm lại, nhìn nhận quá khứ và cẩn trọng lời nói",
+        "đang hội tụ với các vì sao khác, khuếch đại cảm xúc mạnh mẽ",
+        "đang ở vị trí cân bằng, thời điểm tuyệt vời để tĩnh tâm và đưa ra quyết định"
     ];
-    return { thong_diep_vu_tru: energies[Math.floor(Math.random() * energies.length)] };
+    
+    // Lấy trạng thái theo chu kỳ ngày
+    const transit = transitStates[dayOfYear % transitStates.length];
+
+    // Trả về thông điệp chi tiết cho LLM
+    const thong_diep = `Hiện tại, hành tinh cai quản của ${matchedSign} là ${info.planet} ${transit}. Năng lượng nguyên tố ${info.element} đang ${info.energy}. Vận dụng thông tin này để làm rõ nguyên nhân sâu xa trong vấn đề của khách hàng.`;
+    
+    return { 
+        cung_hoang_dao: matchedSign,
+        hanh_tinh_cai_quan: info.planet,
+        nguyen_to: info.element,
+        thong_diep_vu_tru: thong_diep
+    };
 }
 
 // ==========================================

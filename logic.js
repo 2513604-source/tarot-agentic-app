@@ -2,7 +2,7 @@
 // PHẦN 1: LOGIC TÍNH TOÁN
 // ==========================================
 const TarotLogic = {
-    calculateLifePath: function(birthDate) {
+    calculateLifePath: function (birthDate) {
         if (!birthDate) return 0;
         const parts = birthDate.split('-');
         if (parts.length !== 3) return 0;
@@ -21,7 +21,7 @@ const TarotLogic = {
         return sum;
     },
 
-    getLifePathDescription: function(number) {
+    getLifePathDescription: function (number) {
         const descriptions = {
             1: "Bạn là người độc lập, kiên định và sinh ra để dẫn đầu. Bạn luôn muốn tự mình làm mọi thứ và không ngại thử thách mới.",
             2: "Bạn là người nhạy cảm, tinh tế và luôn trân trọng các mối quan hệ. Bạn thích sự hòa bình và thường là người hòa giải tuyệt vời.",
@@ -39,7 +39,7 @@ const TarotLogic = {
         return descriptions[number] || "Số mệnh của bạn ẩn chứa nhiều điều bí ẩn chưa được khai phá.";
     },
 
-    getZodiacSign: function(birthDate) {
+    getZodiacSign: function (birthDate) {
         if (!birthDate) return "";
         const parts = birthDate.split('-');
         const month = parseInt(parts[1]);
@@ -69,7 +69,7 @@ let drawnCards = [];
 let currentCardIndices = [];
 let isReversedCards = [];
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const birthDateInput = document.getElementById('birthDate');
     if (birthDateInput) {
         birthDateInput.addEventListener('change', handleBirthDateChange);
@@ -117,8 +117,8 @@ function showDrawingInterface() {
     currentCardIndices = [];
     isReversedCards = [];
     document.getElementById('finalDrawButton').style.display = 'none';
-    
-    for(let i=1; i<=3; i++) {
+
+    for (let i = 1; i <= 3; i++) {
         const cardEl = document.getElementById(`drawCard${i}`);
         cardEl.innerHTML = `<div class="card-back" style="opacity: 0.3;">🔶</div>`;
         cardEl.classList.add('face-down', 'empty-slot');
@@ -129,22 +129,22 @@ function showDrawingInterface() {
 
 function renderArcSpread() {
     const container = document.getElementById('arcSpreadContainer');
-    if(!container) return;
+    if (!container) return;
     container.innerHTML = '';
-    
+
     const totalCards = 78;
-    let deck = Array.from({length: totalCards}, (_, i) => i);
+    let deck = Array.from({ length: totalCards }, (_, i) => i);
     deck.sort(() => Math.random() - 0.5);
 
     deck.forEach((cardId, index) => {
         const cardEl = document.createElement('div');
         cardEl.className = 'arc-card';
         cardEl.innerHTML = `<img src="images/card-back.jpg" alt="Mặt sau" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'card-back-mini\\'>🔶</div>';">`;
-        
-        const normalizedIdx = (index / (totalCards - 1)) - 0.5; 
-        const angle = normalizedIdx * 60; 
-        const yOffset = - (Math.pow(normalizedIdx * 2, 2)) * 50; 
-        const leftPos = 50 + (normalizedIdx * 90); 
+
+        const normalizedIdx = (index / (totalCards - 1)) - 0.5;
+        const angle = normalizedIdx * 60;
+        const yOffset = - (Math.pow(normalizedIdx * 2, 2)) * 50;
+        const leftPos = 50 + (normalizedIdx * 90);
 
         cardEl.style.left = `${leftPos}%`;
         cardEl.style.transform = `translateX(-50%) translateY(${yOffset}px) rotate(${angle}deg)`;
@@ -154,13 +154,13 @@ function renderArcSpread() {
         cardEl.dataset.origZ = index;
 
         cardEl.addEventListener('mouseenter', () => {
-            if(!cardEl.classList.contains('picked')) {
+            if (!cardEl.classList.contains('picked')) {
                 cardEl.style.transform = `translateX(-50%) translateY(${yOffset - 30}px) rotate(${angle}deg) scale(1.15)`;
                 cardEl.style.zIndex = 100;
             }
         });
         cardEl.addEventListener('mouseleave', () => {
-            if(!cardEl.classList.contains('picked')) {
+            if (!cardEl.classList.contains('picked')) {
                 cardEl.style.transform = cardEl.dataset.origTransform;
                 cardEl.style.zIndex = cardEl.dataset.origZ;
             }
@@ -172,7 +172,7 @@ function renderArcSpread() {
 }
 
 function pickCardFromArc(cardEl, cardId) {
-    if(currentCardIndices.length >= 3 || cardEl.classList.contains('picked')) return;
+    if (currentCardIndices.length >= 3 || cardEl.classList.contains('picked')) return;
 
     const position = currentCardIndices.length;
     currentCardIndices.push(cardId);
@@ -184,10 +184,10 @@ function pickCardFromArc(cardEl, cardId) {
     slotEl.classList.remove('empty-slot');
     slotEl.innerHTML = `<img src="images/card-back.jpg" alt="Mặt sau" class="card-img-back" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'card-back\\'>🔶</div>';">`;
 
-    if(currentCardIndices.length === 3) {
+    if (currentCardIndices.length === 3) {
         const btn = document.getElementById('finalDrawButton');
         btn.style.display = 'block';
-        btn.scrollIntoView({behavior: 'smooth', block: 'center'});
+        btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 }
 
@@ -197,10 +197,10 @@ function pickCardFromArc(cardEl, cardId) {
 function getCardImage(card) {
     if (card.id !== undefined && card.id >= 0 && card.id <= 21) {
         const majors = [
-            "Fool", "Magician", "High_Priestess", "Empress", "Emperor", 
-            "Hierophant", "Lovers", "Chariot", "Strength", "Hermit", 
-            "Wheel_of_Fortune", "Justice", "Hanged_Man", "Death", 
-            "Temperance", "Devil", "Tower", "Star", "Moon", "Sun", 
+            "Fool", "Magician", "High_Priestess", "Empress", "Emperor",
+            "Hierophant", "Lovers", "Chariot", "Strength", "Hermit",
+            "Wheel_of_Fortune", "Justice", "Hanged_Man", "Death",
+            "Temperance", "Devil", "Tower", "Star", "Moon", "Sun",
             "Judgement", "World"
         ];
         let numStr = card.id < 10 ? '0' + card.id : String(card.id);
@@ -244,13 +244,13 @@ function revealCards() {
     drawnCards = currentCardIndices.map((index, idx) => ({
         card: TAROT_DECK[index],
         position: positions[idx],
-        isReversed: isReversedCards[idx] 
+        isReversed: isReversedCards[idx]
     }));
 
     let delay = 0;
     currentCardIndices.forEach((idx, position) => {
         setTimeout(() => { revealCardAnimation(position); }, delay);
-        delay += 500;  
+        delay += 500;
     });
 
     setTimeout(() => {
@@ -266,7 +266,7 @@ function revealCardAnimation(position) {
     const imagePath = getCardImage(card);
 
     cardEl.classList.add('flip-animation');
-    
+
     setTimeout(() => {
         cardEl.innerHTML = '';
         const container = document.createElement('div');
@@ -282,10 +282,10 @@ function revealCardAnimation(position) {
         img.style.height = '100%';
         img.style.objectFit = 'cover';
         img.style.borderRadius = '6px';
-        
+
         if (isReversed) img.style.transform = 'rotate(180deg)';
 
-        img.onerror = function() {
+        img.onerror = function () {
             container.innerHTML = `
                 <div class="card-face" style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100%; background: #2a0845; border-radius: 6px; padding: 5px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
                     <div class="card-symbol" style="font-size: 3rem; margin-bottom: 5px; ${isReversed ? 'transform: rotate(180deg);' : ''}">${card.symbol}</div>
@@ -325,15 +325,15 @@ function displayCardResults(drawnCards) {
             cardEl.querySelector('.card-placeholder').style.display = 'none';
 
             const oldImg = cardEl.querySelector('.card-img-result');
-            if(oldImg) oldImg.remove();
+            if (oldImg) oldImg.remove();
             const oldSymbol = cardEl.querySelector('.card-symbol-large');
-            if(oldSymbol) oldSymbol.remove();
+            if (oldSymbol) oldSymbol.remove();
 
             let imgDiv = document.createElement('img');
             imgDiv.className = 'card-img-result';
             imgDiv.src = getCardImage(card);
-            
-            imgDiv.onerror = function() {
+
+            imgDiv.onerror = function () {
                 this.onerror = null;
                 this.style.display = 'none';
                 let symbolDiv = document.createElement('div');
@@ -362,7 +362,7 @@ function displayCardResults(drawnCards) {
 // Gửi dữ liệu thô lên Server của bạn
 async function generateInterpretation(drawnCards) {
     document.getElementById('loadingState').classList.remove('hidden');
-    
+
     // Gom tất cả thông tin người dùng nhập trên web
     const payload = {
         questionType: document.querySelector('input[name="questionType"]:checked').value,
@@ -388,12 +388,12 @@ async function generateInterpretation(drawnCards) {
         });
 
         if (!response.ok) throw new Error("Lỗi kết nối Server");
-        
+
         const responseData = await response.json();
         // Nhận kết quả từ Server và in ra màn hình
         displayGeminiResult(responseData);
     } catch (error) {
-        console.error("Lỗi:", error); 
+        console.error("Lỗi:", error);
         document.getElementById('interpretationText').innerHTML = `<p class='error-msg'>⚠️ Trạm vũ trụ Backend đang bảo trì. Bạn nhớ bật Server (node server.js) nhé!</p>`;
         document.getElementById('loadingState').classList.add('hidden');
     }
@@ -419,9 +419,9 @@ function resetToForm() {
     document.getElementById('initialState').classList.remove('hidden');
 
     document.getElementById('tarotForm').reset();
-    document.getElementById('zodiac').value = ''; 
+    document.getElementById('zodiac').value = '';
     document.getElementById('lifePathNumber').value = '';
-    
+
     const drawBtn = document.getElementById('drawButton');
     if (drawBtn) {
         drawBtn.disabled = true;
@@ -429,23 +429,23 @@ function resetToForm() {
     }
 
     const arcContainer = document.getElementById('arcSpreadContainer');
-    if(arcContainer) arcContainer.innerHTML = '';
+    if (arcContainer) arcContainer.innerHTML = '';
 
     document.getElementById('interpretationText').innerHTML = '';
     document.getElementById('adviceText').innerHTML = '';
     document.getElementById('lifePathSummary').innerHTML = '';
 
-    for(let i=1; i<=3; i++) {
+    for (let i = 1; i <= 3; i++) {
         const cardEl = document.getElementById(`card${i}`);
-        if(cardEl) {
+        if (cardEl) {
             const oldImg = cardEl.querySelector('.card-img-result');
-            if(oldImg) oldImg.remove();
+            if (oldImg) oldImg.remove();
             const oldSymbol = cardEl.querySelector('.card-symbol-large');
-            if(oldSymbol) oldSymbol.remove();
-            
+            if (oldSymbol) oldSymbol.remove();
+
             const placeholder = cardEl.querySelector('.card-placeholder');
-            if(placeholder) placeholder.style.display = 'flex'; 
-            
+            if (placeholder) placeholder.style.display = 'flex';
+
             cardEl.querySelector('.card-name').textContent = '';
             cardEl.querySelector('.card-vietnamese').textContent = '';
             cardEl.querySelector('.card-position').textContent = '';
