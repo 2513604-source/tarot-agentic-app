@@ -199,6 +199,7 @@ ${profile.guidelines.map(g => `- ${g}`).join('\n')}
 2. **Tỷ lệ Major/Minor Arcana:** Nếu có nhiều lá Ẩn Chính (Major Arcana), hãy khẳng định đây là biến cố mang tính định mệnh, vượt ngoài tầm kiểm soát. Nếu toàn Ẩn Phụ (Minor), đây chỉ là vấn đề tâm lý/hành vi thường ngày.
 3. **Dám đoán tình huống CỤ THỂ:** Dựa vào Cung Hoàng Đạo (${zodiac}) và Số Đường Đời (${lifePathNumber}) kết hợp với bài, BẮT BUỘC phải đưa ra MỘT kịch bản giả định cực kỳ chi tiết về thứ họ đang trải qua. (VD: "Bạn đang làm một công việc ổn định nhưng chán ngấy", hoặc "Bạn đang đơn phương một người không rõ ràng"). Thà đoán sai một tình huống cụ thể, CÒN HƠN nói chung chung kiểu "bạn đang có vấn đề".
 4. **Không nói đạo lý:** Đâm thẳng vào sự thật mất lòng. Phân tích sự việc như một người quan sát sắc lạnh.
+5. Không lặp từ ,câu nhiều lần , hãy sử dụng linh hoạt vốn từ ngữ TIẾNG VIỆT phong phú.
 
 **Dữ liệu người dùng:**
 - Cung Hoàng Đạo: ${zodiac}
@@ -220,7 +221,7 @@ ${cardsInfo}
 }
 }
     `.trim();
-}    
+}
 
 // ==========================================
 // 3. VÒNG LẶP ĐẶC VỤ (ENDPOINT)
