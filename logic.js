@@ -413,8 +413,18 @@ async function generateInterpretation(drawnCards) {
 
 function displayGeminiResult(data) {
     document.getElementById('loadingState').classList.add('hidden');
-    document.getElementById('interpretationText').innerHTML = data.interpretation;
-    document.getElementById('adviceText').innerHTML = data.advice;
+
+    // Tự ráp HTML ở Frontend 
+    const htmlContent = `
+        <p style="margin-bottom: 15px;"><strong>🪐 Vũ trụ đang nói gì với bạn:</strong><br>${data.vu_tru}</p>
+        <p style="margin-bottom: 15px;"><strong>🔥 Bắt bệnh chính xác:</strong><br>${data.bat_benh}</p>
+        <p style="margin-bottom: 15px;"><strong>🃏 Dòng chảy cuộc đời bạn:</strong><br>${data.dong_chay}</p>
+        <p><strong>⚠️ Góc khuất tâm hồn:</strong><br>${data.goc_khuat}</p>
+    `;
+
+    document.getElementById('interpretationText').innerHTML = htmlContent;
+    document.getElementById('adviceText').innerHTML = `<p><strong>💬 Lời khuyên:</strong> ${data.loi_khuyen}</p>`;
+    
     document.querySelector('.interpretation-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 

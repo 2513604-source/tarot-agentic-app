@@ -112,7 +112,6 @@ function buildPrompt(data) {
             tone: "Tự nhiên, thẳng thắn nhưng không phán xét.",
             forbidden: "có thể, có lẽ, tùy thuộc, biết đâu",
             ending: "1 câu message súc tích, chốt lại cốt lõi vấn đề.",
-            readyMessage: "Gửi mình 3 lá bài"
         },
         'career': {
             role: "Tarot Reader chuyên định hướng Sự nghiệp",
@@ -132,7 +131,6 @@ function buildPrompt(data) {
             tone: "Quyết đoán, sòng phẳng, đậm chất 'đọc vị' chuyên môn.",
             forbidden: "có thể, có lẽ, tùy thuộc, biết đâu, vận may",
             ending: "1 câu chốt hạ về hành động cần thực hiện ngay lập tức để thay đổi vận trình công việc.",
-            readyMessage: "Gửi mình 3 lá bài"
         },
         'health': {
             role: "Tarot Reader chuyên phân tích Thân - Tâm - Trí",
@@ -152,7 +150,6 @@ function buildPrompt(data) {
             tone: "Điềm tĩnh, quan sát sâu, nghiêm khắc và trực diện.",
             forbidden: "có thể, có lẽ, tùy thuộc, biết đâu, phép màu",
             ending: "1 câu nhắc nhở đắt giá nhất để khách hàng buộc phải tỉnh thức và nhìn lại bản thân.",
-            readyMessage: "Gửi mình 3 lá bài"
         },
         'general': {
             role: "Tarot Reader chuyên thiết kế Vận trình (Life Architect)",
@@ -214,8 +211,11 @@ ${cardsInfo}
 
 Định dạng JSON yêu cầu:
 {
-  "interpretation": "<p><strong>🪐 Vũ trụ đang nói gì với bạn:</strong> [Kết nối kết quả từ Tool với trạng thái của bạn lúc này. Tại sao năng lượng hành tinh lại khiến bạn rút ra 3 lá bài này? Viết 5 câu sâu sắc]</p><p><strong>🔥 Bắt bệnh chính xác:</strong> [Vẽ ra kịch bản đời thực mà BẠN đang trải qua. Dùng tính cách cung ${zodiac} để giải thích tại sao BẠN lại rơi vào tình cảnh này. Phải gọi tên sự thật đau lòng mà BẠN đang giấu kín. Viết ít nhất 8 câu]</p><p><strong>🃏 Dòng chảy cuộc đời bạn:</strong> [Liên kết 3 lá bài thành một chuỗi logic: Bạn đã sai lầm thế nào trong quá khứ? Hiện tại bạn đang bế tắc ra sao? Tương lai bạn sẽ nhận hậu quả gì nếu không thay đổi ngay? Viết ít nhất 10 câu cực kỳ chi tiết]</p><p><strong>⚠️ Góc khuất tâm hồn:</strong> [Vạch trần cái tôi, sự ích kỷ hoặc hèn nhát đang núp bóng bên trong BẠN. Đừng nể nang. Viết ít nhất 6 câu sắc lẹm]</p>",
-  "advice": "<p><strong>💬 Lời khuyên dành cho bạn:</strong> ${profile.ending}</p>"
+  "vu_tru": "[Kết nối kết quả từ Tool với trạng thái của bạn lúc này. Viết 5 câu sâu sắc]",
+  "bat_benh": "[Vẽ ra kịch bản đời thực dựa trên tính cách cung hoàng đạo. Viết ít nhất 8 câu]",
+  "dong_chay": "[Liên kết 3 lá bài thành một chuỗi logic: Quá khứ - Hiện tại - Tương lai. Viết ít nhất 10 câu chi tiết]",
+  "goc_khuat": "[Vạch trần cái tôi, sự ích kỷ hoặc hèn nhát đang núp bóng bên trong. Viết ít nhất 6 câu sắc lẹm]",
+  "loi_khuyen": "[1 câu message súc tích, chốt lại cốt lõi vấn đề]"
 }
 }
     `.trim();
@@ -248,8 +248,8 @@ app.post('/api/tarot', async (req, res) => {
                     messages: chatHistory,
                     tools: tarotAgentTools,
                     tool_choice: "auto",
-                    temperature: 0.8, // Tăng độ "phiêu" cho AI
-                    max_tokens: 3000    // Cho phép nó viết dài thoải mái
+                    temperature: 0.65, // Tăng độ "phiêu" cho AI
+                    max_tokens: 1750    // Cho phép nó viết dài thoải mái
                 })
             });
 
